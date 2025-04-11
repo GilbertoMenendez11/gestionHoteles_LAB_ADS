@@ -3,15 +3,12 @@ from flask_cors import CORS
 from config.config import app_config
 
 from apis.empleados.routes import Empleados
-<<<<<<< HEAD
 from apis.hoteles.routes import Hoteles
 from apis.limpiezas.routes import Limpiezas
 from apis.pagos.routes import Pagos
 from apis.reservas.routes import Reservas
 from apis.serviciosadicionales.routes import ServiciosAdicionales
 from apis.clientes.routes import Clientes
-=======
->>>>>>> 957918ff37af093c346a95aefc3ec01cf1d417c1
 
 #Crear una instancia de la aplicacion flask 
 app = Flask(__name__)
@@ -36,15 +33,12 @@ if __name__ == '__main__':
     app.config.from_object(app_config['development'])
 
     app.register_blueprint(Empleados.main, url_prefix="/api/empleados")
-<<<<<<< HEAD
     app.register_blueprint(Hoteles.main, url_prefix="/api/hoteles")
     app.register_blueprint(Limpiezas.main, url_prefix="/api/limpiezas")
     app.register_blueprint(Pagos.main, url_prefix="/api/pagos")
     app.register_blueprint(Reservas.main, url_prefix="/api/reservas")
     app.register_blueprint(ServiciosAdicionales.main, url_prefix="/api/serviciosadicionales")
     app.register_blueprint(Clientes.main, url_prefix="/api/clientes")
-=======
->>>>>>> 957918ff37af093c346a95aefc3ec01cf1d417c1
 
     #Registramos el manejador de error 404
     app.register_error_handler(404, paginaNoEncontrada)
