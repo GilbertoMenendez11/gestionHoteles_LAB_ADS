@@ -11,6 +11,7 @@ from apis.serviciosadicionales.routes import ServiciosAdicionales
 from apis.clientes.routes import Clientes
 from apis.habitaciones.routes import Habitaciones
 from apis.facturas.routes import facturas
+from apis.telefonos.routes import Telefono
 
 
 #Crear una instancia de la aplicacion flask 
@@ -44,6 +45,7 @@ if __name__ == '__main__':
     app.register_blueprint(Clientes.main, url_prefix="/api/clientes")
     app.register_blueprint(Habitaciones.main, url_prefix="/api/habitaciones")
     app.register_blueprint(facturas.main, url_prefix="/api/facturas")
+    app.register_blueprint(Telefono.main, url_prefix="/api/telefonos")
 
     #Registramos el manejador de error 404
     app.register_error_handler(404, paginaNoEncontrada)
