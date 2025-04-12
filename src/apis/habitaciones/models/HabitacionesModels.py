@@ -1,17 +1,17 @@
 from database.database import get_connection
 from ..models.entities.Habitaciones import Habitacion
 
-class habitacionModel:
-    #Si queremos mostrar los habitaiones
+class HabitacionModel:
+    #Si queremos mostrar los habitaciones
     @classmethod
-    def get_all_habitaiones(cls):
+    def get_all_habitaciones(cls):
         try:
             connection = get_connection()
-            habitaiones_list = []
+            habitaciones_list = []
             with connection.cursor() as cursor:
                 cursor.execute("""
-                    SELECT idhabitacion, numero, tipo, cargo, precionoche, idhotel
-                    FROM habitaiones
+                    SELECT idhabitacion, numero, tipo, precionoche, estado, idhotel
+                    FROM habitaciones
                     ORDER BY numero ASC
                 """)
                 resultset = cursor.fetchall()
@@ -20,13 +20,13 @@ class habitacionModel:
                         id_habitacion=row[0],
                         numero_habitacion=row[1],
                         tipo_habitacion=row[2],
-                        cargo_habitacion=row[3],
-                        precionoche_habitacion=row[4],
+                        precionoche_habitacion=row[3],
+                        estado_habitacion=row[4],
                         idhotel_habitacion=row[5]
                     )
-                    habitaiones_list.append(habitacion.to_JSON())
+                    habitaciones_list.append(habitacion.to_JSON())
             connection.close()
-            return habitaiones_list
+            return habitaciones_list
         except Exception as ex:
             raise Exception(ex)
     #Si queremos hacer una busqueda por id
@@ -37,8 +37,8 @@ class habitacionModel:
             habitacion_json = None
             with connection.cursor() as cursor:
                 cursor.execute("""
-                SELECT idhabitacion, numero, tipo, cargo, precionoche, idhotel
-                FROM habitaiones
+                SELECT idhabitacion, numero, tipo, precionoche, estado, idhotel
+                FROM habitaciones
                 WHERE idhabitacion = %s""", (habitacion_id,))
                 row = cursor.fetchone()
                 if row is not None:
@@ -46,8 +46,8 @@ class habitacionModel:
                      id_habitacion=row[0],
                         numero_habitacion=row[1],
                         tipo_habitacion=row[2],
-                        cargo_habitacion=row[3],
-                        precionoche_habitacion=row[4],
+                        precionoche_habitacion=row[3],
+                        estado_habitacion=row[4],
                         idhotel_habitacion=row[5]
                     )
                     habitacion_json = habitacion.to_JSON()
@@ -55,21 +55,21 @@ class habitacionModel:
             return habitacion_json
         except Exception as ex:
             raise Exception(ex)
-    #Si queremos insertar habitaiones
+    #Si queremos insertar habitaciones
     @classmethod
     def add_habitacion(cls, habitacion: Habitacion):
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute("""
-                    INSERT INTO habitaiones (
-                    idhabitacion, numero, tipo, cargo, precionoche, idhotel)
+                    INSERT INTO habitaciones (
+                    idhabitacion, numero, tipo, precionoche, estado, idhotel)
                     VALUES (%s,%s,%s,%s,%s,%s)""",
                     (   habitacion.id_habitacion,
                         habitacion.numero_habitacion,
                         habitacion.tipo_habitacion,
-                        habitacion.cargo_habitacion,
                         habitacion.precionoche_habitacion,
+                        habitacion.estado_habitacion,
                         habitacion.idhotel_habitacion)
                 )
                 affected_rows = cursor.rowcount
@@ -85,18 +85,18 @@ class habitacionModel:
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute("""
-                    UPDATE habitaiones
+                    UPDATE habitaciones
                     SET numero = %s,
                     tipo = %s,
-                    cargo = %s,
                     precionoche = %s,
+                    estado = %s,
                     idhotel = %s
                     WHERE idhabitacion = %s
                 """,(
                     habitacion.numero_habitacion,
                     habitacion.tipo_habitacion,
-                    habitacion.cargo_habitacion,
                     habitacion.precionoche_habitacion,
+                    habitacion.estado_habitacion,
                     habitacion.idhotel_habitacion,
                     habitacion.id_habitacion
                 ))
@@ -113,7 +113,7 @@ class habitacionModel:
             connection= get_connection()
             with connection.cursor() as cursor:
                 cursor.execute("""
-                    DELETE FROM habitaiones
+                    DELETE FROM habitaciones
                     WHERE idhabitacion = %s
                 """, (habitacion.id_habitacion,))
                 affected_rows = cursor.rowcount

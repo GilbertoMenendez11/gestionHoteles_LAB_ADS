@@ -1,20 +1,20 @@
 from utils.DateFormat import DateFormat
 
-class Empleado:
-    def __init__(self, id_empleado, nombre_empleado, apellido_empleado, cargo_empleado, telefono_empleado, idhotel_empleado):
-        self.id_empleado = id_empleado
-        self.nombre_empleado = nombre_empleado
-        self.apellido_empleado = apellido_empleado
-        self.cargo_empleado = cargo_empleado
-        self.telefono_empleado = telefono_empleado
-        self.idhotel_empleado = idhotel_empleado
+class Habitacion:
+    def __init__(self, id_habitacion, numero_habitacion, tipo_habitacion, precionoche_habitacion, estado_habitacion, idhotel_habitacion):
+        self.id_habitacion = id_habitacion
+        self.numero_habitacion = numero_habitacion
+        self.tipo_habitacion = tipo_habitacion
+        self.precionoche_habitacion = precionoche_habitacion
+        self.estado_habitacion = estado_habitacion
+        self.idhotel_habitacion = idhotel_habitacion
 
     def to_JSON(self):
         return{
-            "idempleado": self.id_empleado,
-            "nombre": self.nombre_empleado,
-            "apellido": self.apellido_empleado,
-            "cargo": self.cargo_empleado,
-            "telefono": self.telefono_empleado,
-            "idhotel": self.idhotel_empleado,
+            "idhabitacion": self.id_habitacion,
+            "numero": self.numero_habitacion,
+            "tipo": self.tipo_habitacion,
+            "precionoche": self.precionoche_habitacion,
+            "estado": self.estado_habitacion,
+            "idhotel": self.idhotel_habitacion,
         } 
