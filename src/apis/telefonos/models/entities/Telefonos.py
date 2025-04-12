@@ -11,6 +11,6 @@ class Telefono:
         return{
             "id_telefono": self.id_telefono,
             "nombre": self.nombre_telefono,
-            "numero": self.numero_telefono,
+            "numero_telefono": self.numero_telefono,
             "fecha_creacion": self.fecha_creacion_telefono
         } 
